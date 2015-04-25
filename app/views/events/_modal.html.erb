@@ -1,0 +1,48 @@
+ <%if params[:format].present?%>
+ <%f=Event.all.where(:id=>params[:format])%>
+ <%else%>
+ <%f=Event.all.where(:id=>params[:id])%>
+ <%end%>
+
+<div id="property-image" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#property-image" data-slide-to="0" class="active"></li>
+    <li data-target="#property-image" data-slide-to="1"></li>
+    <li data-target="#property-image" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+
+  <% i = 0 %>
+  <div class="carousel-inner">
+    <%if f.first.image_events.present?%>
+      <% f.first.image_events.each do |img|%>
+        <% i = i + 1 %>
+        <% if i == 1 %>
+          <div class="item active">
+            <%=image_tag img.picture,size: "570x400"%>
+            <div class="carousel-caption">
+              <h3>Event Image</h3>
+            </div>
+          </div>
+        <% else %>
+          <div class="item ">
+            <%=image_tag img.picture,size: "570x400"%>
+            <div class="carousel-caption">
+              <h3>Event Image</h3>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 1200
+      cycle: true
+
+    })
+  });
+</script>

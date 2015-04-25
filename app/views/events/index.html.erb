@@ -1,0 +1,88 @@
+<div class="panel panel-default" style="margin-top:50px;">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter Events</a>
+       <span class="tools pull-right">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="fa fa-chevron-down"></a>
+          </span>    </h4>
+  </div>
+<div id="collapseOne" class="panel-collapse collapse in">
+    <div class="panel-body input-group ">
+      <form>
+      <div class="row" >
+        <div class="form-group">
+          <div class="col-sm-5">
+            <label>Name Of Event</label>
+            <%= text_field_tag :name, params[:name],class: "form-control" %>
+          </div>
+          <div class="col-sm-5">
+           <label>Event Type</label>
+           <%= text_field_tag :event_type, params[:event_type],class: "form-control" %>
+          </div>
+        </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+        <div class="form-group">
+          <div class="col-sm-2">
+            <button type="submit" id="temp_button" class="btn btn-info" >Search</button>
+          </div>
+          <div class="col-sm-2">
+            <%= link_to 'Reset',events_path, :class=>"btn btn-info"%>
+          </div>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%= form_tag  multiple_delete_events_path , id: 'event_form_delete', method: :post do %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Manage Events
+        <div>
+          <%= link_to 'ADD NEW',new_event_path, :class=>"btn-new btn-success",:style=>"float:right;margin-top: -23px;"%>&nbsp;
+        </div>
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="dataTable_wrapper">
+          <div>
+          </div>
+          <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <thead>
+              <tr>
+                <th style="width:200px;">Name Of Event</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Add Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="temp">
+            <%if @events.present?%>
+              <%= render @events %>
+            <%else%>
+            <tr>No Enteries Found</tr>
+            <%end%>
+            </tbody>
+          </table>
+          <%= submit_tag "Delete Selected", class: 'btn-new btn-success'  , style: "float:right;margin-top:-23px;", id: 'delete_selected_rows' , data: {confirm: "Are you sure?"} %>
+          <% end %>
+          <ul class="pagination pull-right"  style="border:1px;">
+            <div class="digg_pagination" >
+          <div class="page_info"style="color:blue;">
+            <%= page_entries_info @events if @events.present?%>
+          </div>
+          <%= will_paginate @events, renderer: BootstrapPagination::Rails if @events.present? %>
+        </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

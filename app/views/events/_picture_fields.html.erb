@@ -1,0 +1,7 @@
+
+<% if i < event.event_images.count %>
+  <%#= image_tag property.avatar_images[i].image.url,size: "150x150" %>
+<% end %>
+<% i = i + 1 %>
+<%= f.file_field :pic %>
+<%= f.link_to_remove "Remove this Image"%>

@@ -1,0 +1,63 @@
+<div class="ct h_mrgn">
+   <div class="row">
+      <div class="col7">
+      <h2 style="font-size:22px;color: #36a501;"><img src="/assets/r.png">Event Detail</h2>
+         <div class="tabBox1">
+            <ul class="tabs1" style="margin-top:30px;">
+               <li>
+                  <h3 style="margin-left:10px; color:white;"><%=@event.name%> : <%=@event.event_type%></h3>
+               </li>
+            </ul>
+            <div class="tabContainer1">
+               <div id="tab4" class="tabContent1">
+                  <ul>
+                     <li>
+                        <!-- <div class="box pull-left" style="width: 658px;">
+                           </div> -->
+                        <div class="row" style="margin-left: 2px;background: white;width: 657px;">
+                           <%if @event.blank?%>
+                           <h3>No event available</h3>
+                           <%else%>
+                           <div class="col-md-6" style=" border: 1px solid; border-color: #ccc;margin-left: -1px;height: 100%; width:660px;">
+                              <div class="blog-post">
+                                 <div class="blog-thumb" style="float:left;" >
+                                 <%if @event.image_events.present?%>
+                             <a href="#myModal<%=@event.id%>" role="button" class="btn" data-toggle="modal" style='font-size:23px;'><%=image_tag @event.image_events.first.picture,size: "150x150",:style=>"float:right;"%></a>
+                                       <%end%>
+                                 </div>
+                                 <div class="blog-content">
+                                    <div class="content-show" style="margin-top: 16px;">
+                                       <%= simple_format @event.description%>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal<%=@event.id%>" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Images</h4>
+      </div>
+      <div class="modal-body">
+      <%= render'modal',:id => @event.id  %>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+                           <% end %>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="que_form">
+     <%=render'queries/form',:query => @query %>
+  </div>
+ </div>
+</div>
